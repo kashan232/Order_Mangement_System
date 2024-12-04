@@ -18,11 +18,19 @@ class HomeController extends Controller
                 return view('user_panel.dashboard', [
                     'userId' => $userId,
                 ]);
-            } 
-             
-            else if($usertype=='admin')
+            } else if($usertype=='admin')
             {
                 return view('admin_panel.dashboard', [
+                    'userId' => $userId,
+                ]);
+            }else if($usertype=='Saler')
+            {
+                return view('saler_panel.dashboard', [
+                    'userId' => $userId,
+                ]);
+            }else if($usertype=='Caller')
+            {
+                return view('caller_panel.dashboard', [
                     'userId' => $userId,
                 ]);
             }  
