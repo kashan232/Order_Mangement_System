@@ -13,7 +13,7 @@
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Dashboard </a></li>
                             <li class="breadcrumb-item"><i class="feather-chevron-right"></i></li>
-                            <li class="breadcrumb-item active">Caller Dashboard</li>
+                            <li class="breadcrumb-item active">Customer Care Dashboard</li>
                         </ul>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="morning-user">
-                            <h2>Welcome Caller, <span>{{ Auth::user()->name }}</span></h2>
+                            <h2>Welcome Customer Care, <span>{{ Auth::user()->name }}</span></h2>
                             <p>Have a nice day at work</p>
                         </div>
                     </div>

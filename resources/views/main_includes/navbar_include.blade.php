@@ -20,10 +20,8 @@
 					<span>
 						@if (Auth::user()->usertype === 'admin')
 						Admin
-						@elseif (Auth::user()->usertype === 'Saler')
-						Saler
-						@elseif (Auth::user()->usertype === 'Caller')
-						Caller
+						@elseif (Auth::user()->usertype === 'Customer Care')
+						Customer Care
 						@else
 						Unknown
 						@endif

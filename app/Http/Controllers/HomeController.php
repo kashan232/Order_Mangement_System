@@ -23,12 +23,7 @@ class HomeController extends Controller
                 return view('admin_panel.dashboard', [
                     'userId' => $userId,
                 ]);
-            }else if($usertype=='Saler')
-            {
-                return view('saler_panel.dashboard', [
-                    'userId' => $userId,
-                ]);
-            }else if($usertype=='Caller')
+            }else if($usertype=='Customer Care')
             {
                 return view('caller_panel.dashboard', [
                     'userId' => $userId,

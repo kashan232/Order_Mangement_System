@@ -1,7 +1,8 @@
 @include('main_includes.header_include')
 <div class="main-wrapper">
 	@include('main_includes.navbar_include')
-	@include('main_includes.admin_sidebar_include')
+    @include('main_includes.caler_sidebar_include')
+
 
 	<div class="page-wrapper">
 		<div class="content">
@@ -14,16 +15,18 @@
 							<li class="breadcrumb-item"><i class="feather-chevron-right"></i></li>
 							<li class="breadcrumb-item active">Caller Account</li>
 						</ul>
-						<select class="form-select w-auto" id="customer_id" name="customer_id" required>
-							<option value="Admin">Admin</option>
-							<option value="Customers Care">Customers Care</option>
-						</select>
 					</div>
 				</div>
 			</div>
 			<!-- /Page Header -->
 
 			<div class="row">
+				@if (session()->has('success'))
+				<div class="alert alert-success alert-dismissible fade show mt-4">
+					<strong>Success!</strong> {{ session('success') }}.
+				</div>
+				@endif
+
 				<div class="col-sm-12">
 					<div class="card-box">
 						<div class="card-block">
@@ -49,7 +52,7 @@
 												</thead>
 												<tbody>
 													@forelse ($Customers as $key => $customer)
-													<tr data-customer-type="{{ $customer->user_type }}">
+													<tr>
 														<td>{{ $key + 1 }}</td>
 														<td>{{ $customer->customer_name }}</td>
 														<td>{{ $customer->shop_name }}</td>

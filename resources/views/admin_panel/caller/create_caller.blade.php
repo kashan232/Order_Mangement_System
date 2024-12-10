@@ -12,7 +12,7 @@
 						<ul class="breadcrumb">
 							<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
 							<li class="breadcrumb-item"><i class="feather-chevron-right"></i></li>
-							<li class="breadcrumb-item active">Caller Account</li>
+							<li class="breadcrumb-item active">Customer Care Account</li>
 						</ul>
 					</div>
 				</div>
@@ -33,49 +33,48 @@
 							<form action="{{ route('callers.store') }}" method="POST" enctype="multipart/form-data">
 								@csrf
 								<div class="row">
+									<!-- Form Title -->
 									<div class="col-12">
-										<div class="form-heading">
-											<h4>Caller Details</h4>
-										</div>
+										<h4 class="form-heading">Customer Care Details</h4>
 									</div>
 
 									<!-- Name -->
 									<div class="col-12 col-md-6 col-xl-4">
 										<div class="input-block local-forms">
-											<label>Name <span class="login-danger">*</span></label>
-											<input class="form-control" type="text" name="name" value="{{ old('name') }}" placeholder="Enter caller's name" required>
+											<label>Name <span class="text-danger">*</span></label>
+											<input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Enter customer's name" required>
 										</div>
 									</div>
 
 									<!-- Email -->
 									<div class="col-12 col-md-6 col-xl-4">
 										<div class="input-block local-forms">
-											<label>Email <span class="login-danger">*</span></label>
-											<input class="form-control" type="email" name="email" value="{{ old('email') }}" placeholder="Enter email address" required>
+											<label>Email <span class="text-danger">*</span></label>
+											<input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Enter email address" required>
 										</div>
 									</div>
 
 									<!-- Password -->
 									<div class="col-12 col-md-6 col-xl-4">
 										<div class="input-block local-forms">
-											<label>Password <span class="login-danger">*</span></label>
-											<input class="form-control" type="password" name="password" placeholder="Create a password" required>
+											<label>Password <span class="text-danger">*</span></label>
+											<input type="password" class="form-control" name="password" placeholder="Create a password" required>
 										</div>
 									</div>
 
 									<!-- District -->
 									<div class="col-12 col-md-6 col-xl-4">
 										<div class="input-block local-forms">
-											<label>District <span class="login-danger">*</span></label>
-											<input class="form-control" type="text" name="district" value="{{ old('district') }}" placeholder="Enter district name" required>
+											<label>District <span class="text-danger">*</span></label>
+											<input type="text" class="form-control" name="district" value="{{ old('district') }}" placeholder="Enter district" required>
 										</div>
 									</div>
 
 									<!-- Area -->
 									<div class="col-12 col-md-6 col-xl-4">
 										<div class="input-block local-forms">
-											<label>Area <span class="login-danger">*</span></label>
-											<input class="form-control" type="text" name="area" value="{{ old('area') }}" placeholder="Enter area or locality" required>
+											<label>Area <span class="text-danger">*</span></label>
+											<input type="text" class="form-control" name="area" value="{{ old('area') }}" placeholder="Enter area or locality" required>
 										</div>
 									</div>
 
@@ -83,15 +82,15 @@
 									<div class="col-12 col-md-6 col-xl-4">
 										<div class="input-block local-forms">
 											<label>Region</label>
-											<input class="form-control" type="text" name="region" value="{{ old('region') }}" placeholder="Enter region" required>
+											<input type="text" class="form-control" name="region" value="{{ old('region') }}" placeholder="Enter region">
 										</div>
 									</div>
 
 									<!-- Contact Number -->
 									<div class="col-12 col-md-6 col-xl-4">
 										<div class="input-block local-forms">
-											<label>Contact Number <span class="login-danger">*</span></label>
-											<input class="form-control" type="text" name="contact_number" value="{{ old('contact_number') }}" placeholder="Enter contact number" required>
+											<label>Contact Number <span class="text-danger">*</span></label>
+											<input type="tel" class="form-control" name="contact_number" value="{{ old('contact_number') }}" placeholder="Enter contact number" required>
 										</div>
 									</div>
 
@@ -115,14 +114,13 @@
 									</div>
 
 									<!-- Submit Buttons -->
-									<div class="col-12">
-										<div class="doctor-submit">
-											<button type="submit" class="btn btn-primary submit-form me-2">Submit</button>
-											<button type="reset" class="btn btn-primary cancel-form">Cancel</button>
-										</div>
+									<div class="col-12 text-right">
+										<button type="submit" class="btn btn-primary me-2">Submit</button>
+										<button type="reset" class="btn btn-secondary">Cancel</button>
 									</div>
 								</div>
 							</form>
+
 
 
 						</div>

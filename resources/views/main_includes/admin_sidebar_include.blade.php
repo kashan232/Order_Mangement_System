@@ -25,6 +25,21 @@
                     </ul>
                 </li>
 
+                <li>
+                    <a href="{{ route('complaints.list') }}"><span class="menu-side"><img src="/Order_Booker_System/assets/img/icons/menu-icon-01.svg" alt=""></span> <span> Complaints </span></a>
+                </li>
+
+                 <li class="submenu">
+                    <a href="#"><span class="menu-side"><img src="/Order_Booker_System/assets/img/icons/menu-icon-07.svg" alt=""></span> <span> Customer Care </span> <span class="menu-arrow"></span></a>
+                    <ul style="display: none;">
+                        <li><a href="{{ route('callers.create') }}"> Customer Care </a></li>
+                        <li><a href="{{ route('callers.index') }}"> List Customer Cares </a></li>
+                    </ul>
+                </li>
+
+
+                
+
 
 
                 <!-- Saler Account -->
@@ -36,15 +51,7 @@
                     </ul>
                 </li> -->
 
-                 <!-- Caller Team -->
-                 <!-- <li class="submenu">
-                    <a href="#"><span class="menu-side"><img src="/Order_Booker_System/assets/img/icons/menu-icon-07.svg" alt=""></span> <span> Caller Team </span> <span class="menu-arrow"></span></a>
-                    <ul style="display: none;">
-                        <li><a href="{{ route('callers.create') }}"> Create Caller </a></li>
-                        <li><a href="{{ route('callers.index') }}"> List Callers </a></li>
-                    </ul>
-                </li> -->
-
+                 
                
                
 

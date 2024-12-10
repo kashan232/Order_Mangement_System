@@ -5,20 +5,37 @@
 				<li>
 					<a href="#"><span class="menu-side"><img src="assets/img/icons/menu-icon-01.svg" alt=""></span> <span> Dashboard </span></a>
 				</li>
-				<li class="submenu">
-					<a href="#"><span class="menu-side"><img src="assets/img/icons/menu-icon-09.svg" alt=""></span> <span> Payroll </span> <span class="menu-arrow"></span></a>
-					<ul style="display: none;">
-						<li><a href="salary.html"> Employee Salary </a></li>
-						<li><a href="salary-view.html"> Payslip </a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="chat.html"><span class="menu-side"><img src="assets/img/icons/menu-icon-10.svg" alt=""></span> <span>Chat</span></a>
-				</li>
+				
+
+				 <!-- Customers -->
+                 <li class="submenu">
+                    <a href="#"><span class="menu-side"><img src="/Order_Booker_System/assets/img/icons/menu-icon-06.svg" alt=""></span> <span> Customers </span> <span class="menu-arrow"></span></a>
+                    <ul style="display: none;">
+                        <li><a href="{{ route('customerscare.create') }}"> Create Customer </a></li>
+                        <li><a href="{{ route('customerscare.index') }}"> List Customers </a></li>
+                    </ul>
+                </li>
+
+                <!-- Sales -->
+                <li class="submenu">
+                    <a href="#"><span class="menu-side"><img src="/Order_Booker_System/assets/img/icons/menu-icon-06.svg" alt=""></span> <span> Sales </span> <span class="menu-arrow"></span></a>
+                    <ul style="display: none;">
+                        <li><a href="{{ route('customerscaresales.create') }}"> Create Sales </a></li>
+                        <li><a href="{{ route('customerscaresales.index') }}"> List Sales </a></li>
+                    </ul>
+                </li>
+
+                 <!-- Complains -->
+                 <li class="submenu">
+                    <a href="#"><span class="menu-side"><img src="/Order_Booker_System/assets/img/icons/menu-icon-06.svg" alt=""></span> <span> Complaint </span> <span class="menu-arrow"></span></a>
+                    <ul style="display: none;">
+                        <li><a href="{{ route('complaints.create') }}"> Create Complaint </a></li>
+                        <li><a href="{{ route('complaints') }}"> List Complaint </a></li>
+                    </ul>
+                </li>
+
 			</ul>
-			<div class="logout-btn">
-				<a href="login.html"><span class="menu-side"><img src="assets/img/icons/logout.svg" alt=""></span> <span>Logout</span></a>
-			</div>
+			
 		</div>
 	</div>
 </div>

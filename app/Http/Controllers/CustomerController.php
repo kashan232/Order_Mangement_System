@@ -53,9 +53,8 @@ class CustomerController extends Controller
         ]);
 
         // Redirect or show success message
-        return redirect()->route('customers.index')->with('success', 'Customer registered successfully.');
+        return redirect()->back()->with('success', 'Customer registered successfully.');
     }
-
 
     public function index()
     {
@@ -77,4 +76,31 @@ class CustomerController extends Controller
         return redirect()->back()->with('success', 'Customer Has Been Deleted Successsfully');
     }
     
+    
+    public function customercarecreate()
+    {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            return view('caller_panel.customers.create_customers', []);
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function customerscare_index()
+    {
+        if (Auth::id()) {
+            $adminid = Auth::id();
+            $user_id = auth()->user()->user_id;
+            $usertype = auth()->user()->usertype;
+            $Customers = Customer::where('admin_id', '=', $adminid)->where('user_id', '=', $user_id)->where('user_type', '=', $usertype)->get();
+            return view('caller_panel.customers.customers', [
+                'Customers' => $Customers,
+            ]);
+        } else {
+            return redirect()->back();
+        }
+    }
+    
+
 }

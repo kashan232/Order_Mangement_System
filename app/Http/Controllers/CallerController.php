@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Caller;
-use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 
 class CallerController extends Controller
 {
@@ -21,47 +22,51 @@ class CallerController extends Controller
         }
     }
 
+
     public function store(Request $request)
     {
-        // Get the authenticated admin ID
-        $adminid = Auth::id();
-
-        // Validate the input data
-        // $validated = $request->validate([
-        //     'customer_name' => 'required',
-        //     'shop_name' => 'required',
-        //     'shop_number' => 'required',
-        //     'mobile_number' => 'required',
-        //     'cnic' => 'required',
-        //     'address' => 'required',
-        //     'zipcode' => 'required',
-        //     'landmark' => 'required',
-        //     'business_type' => 'required',
-        //     'opening_hours' => 'required',
-        //     'registration_number' => 'required',
-        //     'notes' => 'required',
-        // ]);
-
-        // Create a new customer record
-        $customer = Customer::create([
-            'admin_id' => $adminid,
-            'customer_name' =>$request->customer_name,
-            'shop_name' =>$request->shop_name,
-            'shop_number' =>$request->shop_number ?? null,
-            'mobile_number' =>$request->mobile_number,
-            'cnic' =>$request->cnic,
-            'address' =>$request->address,
-            'zipcode' =>$request->zipcode ?? null,
-            'landmark' =>$request->landmark ?? null,
-            'business_type' =>$request->business_type ?? null,
-            'opening_hours' =>$request->opening_hours ?? null,
-            'registration_number' =>$request->registration_number ?? null,
-            'notes' =>$request->notes ?? null,
+        // Validate incoming data
+        $request->validate([
+            'name'            => 'required|string|max:255',
+            'email'           => 'required|email|unique:callers,email',
+            'password'        => 'required|string|min:6',
+            'district'        => 'required|string|max:255',
+            'area'            => 'required|string|max:255',
+            'region'          => 'nullable|string|max:255',
+            'contact_number'  => 'required|string|max:20',
+            'notes'           => 'nullable|string',
+            'status'          => 'required|in:active,inactive',
         ]);
 
-        // Redirect or show success message
-        return redirect()->route('customers.index')->with('success', 'customers registered successfully.');
+        // Store Caller data
+        $Caller = new Caller();
+        $Caller->admin_id       = Auth::id(); // Link to admin
+        $Caller->name           = $request->name;
+        $Caller->email          = $request->email;
+        $Caller->password       = Hash::make($request->password);
+        $Caller->district       = $request->district;
+        $Caller->area           = $request->area;
+        $Caller->region         = $request->region;
+        $Caller->contact_number = $request->contact_number;
+        $Caller->notes          = $request->notes;
+        $Caller->status         = $request->status;
+        $Caller->save();
+
+
+          // Create a corresponding user record for login
+        $user = User::create([
+            'name' => $request['name'],  // Store full name in the user table
+            'user_id' => $Caller->id,
+            'email' => $request['email'],
+            'password' => bcrypt($request['password']), // Hash the password
+            'usertype' => 'Customer Care', // Set the usertype to 'Saler'
+        ]);
+
+        // Redirect with success message
+        return redirect()->route('callers.index')
+            ->with('success', 'Caller registered successfully.');
     }
+
 
     public function index()
     {

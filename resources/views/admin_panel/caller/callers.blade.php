@@ -12,7 +12,7 @@
 						<ul class="breadcrumb">
 							<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
 							<li class="breadcrumb-item"><i class="feather-chevron-right"></i></li>
-							<li class="breadcrumb-item active">Caller Account</li>
+							<li class="breadcrumb-item active">Customer Care Account</li>
 						</ul>
 					</div>
 				</div>
@@ -29,7 +29,7 @@
 				<div class="col-sm-12">
 					<div class="card-box">
 						<div class="card-block">
-							<h6 class="card-title text-bold">Callers</h6>
+							<h6 class="card-title text-bold">Customer Cares</h6>
 							<div class="table-responsive">
 								<div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
 									<div class="row">

@@ -23,11 +23,6 @@
 				<div class="col-sm-12">
 					<div class="card">
 						<div class="card-body">
-							@if (session()->has('success'))
-							<div class="alert alert-success alert-dismissible fade show mt-4">
-								<strong>Success!</strong> {{ session('success') }}.
-							</div>
-							@endif
 							@if ($errors->any())
 							<div class="alert alert-danger">
 								@foreach ($errors->all() as $error)

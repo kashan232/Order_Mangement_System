@@ -1,7 +1,7 @@
 @include('main_includes.header_include')
 <div class="main-wrapper">
 	@include('main_includes.navbar_include')
-	@include('main_includes.admin_sidebar_include')
+    @include('main_includes.caler_sidebar_include')
 
 	<div class="page-wrapper">
 		<div class="content">

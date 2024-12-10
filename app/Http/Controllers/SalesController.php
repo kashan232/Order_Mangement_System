@@ -50,7 +50,7 @@ class SalesController extends Controller
         ]);
 
         // Redirect or Response after saving the sale
-        return redirect()->route('sales.index')->with('success', 'Sale recorded successfully!');
+        return redirect()->back()->with('success', 'Sale recorded successfully!');
     }
 
     public function index()
@@ -75,5 +75,39 @@ class SalesController extends Controller
     {
         $Sales = Sales::find($id)->delete();
         return redirect()->back()->with('success', 'Sales Has Been Deleted Successsfully');
+    }
+
+
+    public function customerscaresalescreate()
+    {
+        if (Auth::id()) {
+            $adminid = Auth::id();
+            $user_id = auth()->user()->user_id;
+            $usertype = auth()->user()->usertype;
+            $customers = Customer::where('admin_id', '=', $adminid)->where('user_id', '=', $user_id)->where('user_type', '=', $usertype)->get();
+            return view('caller_panel.sales.create_sales', [
+                'customers' => $customers,
+            ]);
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function customerscaresalesindex()
+    {
+        if (Auth::id()) {
+            $adminid = Auth::id();
+
+            // Use eager loading to get customers associated with each sale
+            $sales = Sales::where('admin_id', '=', $adminid)->with('customer')->get();
+            $customers = Customer::where('admin_id', '=', $adminid)->get();
+
+            return view('caller_panel.sales.sales', [
+                'sales' => $sales,
+                'customers' => $customers,
+            ]);
+        } else {
+            return redirect()->back();
+        }
     }
 }
