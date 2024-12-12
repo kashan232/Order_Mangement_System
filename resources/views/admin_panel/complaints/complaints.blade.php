@@ -63,12 +63,12 @@
 														<td>
 															@if($complaint->status == 'Pending')
 															<span class="badge bg-primary">{{ $complaint->status }}</span>
-															@elseif($complaint->status == 'Resolved')
+															@elseif($complaint->status == 'Closed')
 															<span class="badge bg-success">{{ $complaint->status }}</span>
 															@elseif($complaint->status == 'In Progress')
 															<span class="badge bg-danger">{{ $complaint->status }}</span>
 															@else
-															<span class="badge bg-secondary">{{ $complaint->status }}</span>
+															<span class="badge bg-danger">{{ $complaint->status }}</span>
 															@endif
 														</td>
 														<td>

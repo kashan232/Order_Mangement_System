@@ -34,6 +34,15 @@
                     </ul>
                 </li>
 
+                 <!-- Reviews -->
+                 <li class="submenu">
+                    <a href="#"><span class="menu-side"><img src="/Order_Booker_System/assets/img/icons/menu-icon-06.svg" alt=""></span> <span> Reviews </span> <span class="menu-arrow"></span></a>
+                    <ul style="display: none;">
+                        <li><a href="{{ route('reviews.create') }}"> Create Reviews </a></li>
+                        <li><a href="{{ route('reviews') }}"> List Reviews </a></li>
+                    </ul>
+                </li>
+
 			</ul>
 			
 		</div>

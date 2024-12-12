@@ -14,14 +14,14 @@
 				<div class="modal-body">
 					<form id="complaintForm">
 						<div class="alert alert-success text-dark" role="alert" id="alertmessage" style="display: none;"></div>
+						<input type="hidden" name="complaint_id" id="complaint_id" readonly>
+						<input type="hidden" name="complaint_cnic" id="complaint_cnic" readonly>
 
-						<input type="hidden" name="complain_id" value="15176" readonly>
-						<input type="hidden" name="complain_cnic" value="41203-0848637-7" readonly>
 
 						<div class="form-group">
 							<label for="status">Status:</label>
 							<select class="form-control" id="status" name="status">
-								<option value="In process">In process</option>
+								<option value="In Process">In process</option>
 								<option value="Closed">Closed</option>
 							</select>
 						</div>
@@ -32,7 +32,7 @@
 						</div>
 
 						<div class="w-100 text-right">
-							<button type="button" class="btn btn-primary" id="submitBtn">Submit</button>
+							<button type="button" class="btn btn-primary mt-2 mb-2" id="submitBtn">Submit</button>
 						</div>
 					</form>
 				</div>
@@ -114,7 +114,7 @@
 											<tr>
 												<td><b>Status</b></td>
 												<td>
-													<span class="btn btn-{{ $complaint->status == 'Resolved' ? 'success' : 'danger' }} btn-sm">
+													<span class="btn btn-{{ strtolower($complaint->status) == 'closed' ? 'success' : 'danger' }} btn-sm">
 														{{ ucfirst($complaint->status) }}
 													</span>
 												</td>
@@ -127,15 +127,33 @@
 												<td><b>Updated At</b></td>
 												<td>{{ \Carbon\Carbon::parse($complaint->updated_at)->format('F d, Y h:i A') }}</td>
 											</tr>
+
+											<!-- Show Remarks if Status is "In Process" or "Closed" -->
+											@if(in_array(strtolower($complaint->status), ['in process', 'closed']))
+											<tr>
+												<td><b>Remarks</b></td>
+												<td>{{ $complaint->remark ?? 'No remarks available' }}</td>
+											</tr>
+											@endif
+
 											<tr>
 												<td colspan="2" class="text-center">
-													<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#takeActionModal">
+													@if(strtolower($complaint->status) == 'closed')
+													<span class="btn btn-secondary disabled">No Action Taken</span>
+													@else
+													<button type="button" class="btn btn-primary"
+														data-toggle="modal" data-target="#takeActionModal"
+														data-id="{{ $complaint->id }}"
+														data-cnic="{{ $complaint->contact_number }}">
 														Take Action
 													</button>
+													@endif
 												</td>
 											</tr>
 										</tbody>
 									</table>
+
+
 
 								</div>
 							</div>
@@ -152,7 +170,7 @@
 @include('main_includes.footer_include')
 
 <!-- jQuery library -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <!-- Popper JS -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -162,6 +180,41 @@
 <!-- <script src="https://code.jquery.com/jquery-3.7.1.js"></script> -->
 
 <script>
+	$('#takeActionModal').on('show.bs.modal', function(event) {
+		const button = $(event.relatedTarget);
+		const complaintId = button.data('id');
+		const complaintCnic = button.data('cnic');
+
+		$('#complaint_id').val(complaintId);
+		$('#complaint_cnic').val(complaintCnic);
+	});
+
+	$('#submitBtn').on('click', function(e) {
+		e.preventDefault(); // Prevent the default form submission
+
+		var formData = {
+			complaint_id: $('#complaint_id').val(),
+			complaint_cnic: $('#complaint_cnic').val(),
+			status: $('#status').val(),
+			remark: $('#remark').val(),
+			_token: '{{ csrf_token() }}'
+		};
+
+		$.ajax({
+			url: "{{ route('complaints.update') }}",
+			type: "POST",
+			data: formData,
+			success: function(response) {
+				$('#alertmessage').show().text(response.message);
+				$('#takeActionModal').modal('hide');
+				location.reload(); // Refresh the page to see updates
+			},
+			error: function(response) {
+				alert('Something went wrong. Please try again.');
+			}
+		});
+	});
+
 	document.getElementById('all_complains').addEventListener('change', function() {
 		const filterValue = this.value; // Get the selected customer id
 		const rows = document.querySelectorAll('table tbody tr'); // Select all table rows

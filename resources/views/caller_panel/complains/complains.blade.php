@@ -44,7 +44,7 @@
 											<th>POS Name</th>
 											<th>Date of Complaint</th>
 											<th>Status</th>
-											<th>Actions</th>
+											<th>Remarks</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -59,17 +59,16 @@
 											<td>
 												@if($complaint->status == 'Pending')
 												<span class="badge bg-primary">{{ $complaint->status }}</span>
-												@elseif($complaint->status == 'Resolved')
+												@elseif($complaint->status == 'Closed')
 												<span class="badge bg-success">{{ $complaint->status }}</span>
-												@elseif($complaint->status == 'In Progress')
+												@elseif($complaint->status == 'In Process')
 												<span class="badge bg-danger">{{ $complaint->status }}</span>
 												@else
-												<span class="badge bg-secondary">{{ $complaint->status }}</span>
+												<span class="badge bg-danger">{{ $complaint->status }}</span>
 												@endif
 											</td>
-											<td>
-												<a href="#" class="btn btn-sm btn-primary">View</a>
-											</td>
+											<td>{{ $complaint->remark }}</td>
+											
 										</tr>
 										@empty
 										<tr>

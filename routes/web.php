@@ -6,6 +6,8 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SalerController;
 use App\Http\Controllers\SalesController;
 use Illuminate\Support\Facades\Route;
@@ -53,12 +55,17 @@ Route::delete('/delete-sales/{id}', [CustomerController::class, 'delete_sales'])
 
 Route::get('/complaints/complaint', [ComplaintController::class, 'list'])->name('complaints.list');
 Route::get('/complaints/view/{id}', [ComplaintController::class, 'view'])->name('complaints.view');
+Route::post('complaints/update', [ComplaintController::class, 'update'])->name('complaints.update');
 
 
 Route::get('/complaints/create', [ComplaintController::class, 'create'])->name('complaints.create');
 Route::post('/complaint/store', [ComplaintController::class, 'store'])->name('complaints.store');
 Route::get('/complaints', [ComplaintController::class, 'complaints'])->name('complaints');
 
+
+Route::get('/reviews/create', [ReviewController::class, 'create'])->name('reviews.create');
+Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews.store');
+Route::get('/reviews', [ReviewController::class, 'reviews'])->name('reviews');
 
 
 // Caller Management
@@ -86,6 +93,11 @@ Route::get('/products', [ProductController::class, 'index'])->name('products.ind
 // // Customer Assign to Saler
 // Route::get('/assign-customers', [CustomerAssignmentController::class, 'create'])->name('customers.assign');
 // Route::get('/assigned-customers', [CustomerAssignmentController::class, 'index'])->name('customers.assigned');
+
+
+
+// Reports
+Route::get('/report/order/taker', [ReportController::class, 'order_taker_report'])->name('report.order.taker');
 
 
 Route::middleware('auth')->group(function () {

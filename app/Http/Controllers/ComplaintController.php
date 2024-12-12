@@ -47,6 +47,26 @@ class ComplaintController extends Controller
         }
     }
 
+    public function update(Request $request)
+    {
+        $request->validate([
+            'complaint_id' => 'required|integer',
+            'status' => 'required|string',
+            'remark' => 'required|string',
+        ]);
+
+        $complaint = Complaint::find($request->complaint_id);
+        if ($complaint) {
+            $complaint->status = $request->status;
+            $complaint->remark = $request->remark;
+            $complaint->save();
+
+            return response()->json(['message' => 'Complaint updated successfully.']);
+        }
+
+        return response()->json(['message' => 'Complaint not found.'], 404);
+    }
+
     public function create()
     {
         if (Auth::id()) {
